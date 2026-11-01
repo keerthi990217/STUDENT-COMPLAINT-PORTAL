@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard — Complaint Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="student-dashboard">
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+    <div class="navbar-brand">
+        <div class="brand-icon">📋</div>
+        <div>
+            <div class="brand-text">Complaint Portal</div>
+            <div class="brand-sub">Student Dashboard</div>
+        </div>
+    </div>
+    <ul class="navbar-nav">
+        <li><a href="dashboard.html" class="active">🏠 Dashboard</a></li>
+        <li><a href="submit_complaint.html">➕ New Complaint</a></li>
+        <li><a href="check_status.html">🔍 Track</a></li>
+        <li><a href="php/logout.php?type=student" class="btn-logout">Logout</a></li>
+    </ul>
+</nav>
+
+<!-- ── Page Header ── -->
+<div class="page-header">
+    <div class="container">
+        <h1>My Dashboard</h1>
+        <p>View and track all your submitted complaints</p>
+    </div>
+</div>
+
+<!-- ── Dashboard Content ── -->
+<div class="container" style="padding-top: 32px; padding-bottom: 48px;">
+
+    <!-- Quick Actions -->
+    <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px;">
+        <a href="submit_complaint.html" class="btn btn-primary">
+            ➕ Submit New Complaint
+        </a>
+        <a href="check_status.html" class="btn btn-outline">
+            🔍 Track by Code
+        </a>
+    </div>
+
+    <!-- Complaints Table -->
+    <div class="card">
+        <div class="card-header">
+            <h3>📋 My Complaints</h3>
+            <button class="btn btn-sm btn-outline" onclick="loadStudentComplaints()">🔄 Refresh</button>
+        </div>
+        <div class="card-body" style="padding: 0;">
+            <div id="myComplaintsContainer" style="padding: 20px;">
+                <p style="color:var(--gray-500)">Loading your complaints...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Box -->
+    <div class="alert alert-info mt-3">
+        <span>ℹ️</span>
+        <div>
+            <strong>Privacy Notice:</strong> When you submit a complaint with anonymous mode enabled, your name and student ID will not be visible to anyone — including admin staff. Only you know your complaint code.
+        </div>
+    </div>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

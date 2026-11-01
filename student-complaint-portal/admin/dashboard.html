@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — Complaint Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="admin-dashboard">
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+    <div class="navbar-brand">
+        <div class="brand-icon">🔐</div>
+        <div>
+            <div class="brand-text">Admin Panel</div>
+            <div class="brand-sub">Complaint Management System</div>
+        </div>
+    </div>
+    <ul class="navbar-nav">
+        <li><a href="dashboard.html" class="active">📊 Dashboard</a></li>
+        <li><a href="../php/logout.php?type=admin" class="btn-logout">Logout</a></li>
+    </ul>
+</nav>
+
+<!-- ── Dashboard Layout ── -->
+<div class="dashboard-layout">
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-label">Management</div>
+            <div class="sidebar-link active" onclick="showSection('allComplaints')">
+                <span class="icon">📋</span> All Complaints
+            </div>
+            <div class="sidebar-link" onclick="filterByStatus('pending')">
+                <span class="icon">🕐</span> Pending
+            </div>
+            <div class="sidebar-link" onclick="filterByStatus('in_progress')">
+                <span class="icon">🔄</span> In Progress
+            </div>
+            <div class="sidebar-link" onclick="filterByStatus('resolved')">
+                <span class="icon">✅</span> Resolved
+            </div>
+            <div class="sidebar-link" onclick="filterByStatus('rejected')">
+                <span class="icon">❌</span> Rejected
+            </div>
+        </div>
+    </aside>
+
+    <!-- ── Main Content ── -->
+    <main class="main-content">
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="statTotal">—</div>
+                <div class="stat-label">Total Complaints</div>
+            </div>
+            <div class="stat-card amber">
+                <div class="stat-number" id="statPending">—</div>
+                <div class="stat-label">Pending</div>
+            </div>
+            <div class="stat-card blue">
+                <div class="stat-number" id="statProgress">—</div>
+                <div class="stat-label">In Progress</div>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-number" id="statResolved">—</div>
+                <div class="stat-label">Resolved</div>
+            </div>
+        </div>
+
+        <!-- Complaints Section -->
+        <div class="card">
+            <div class="card-header">
+                <h3>📋 Complaint Management</h3>
+                <button class="btn btn-sm btn-outline" onclick="loadAdminComplaints()">🔄 Refresh</button>
+            </div>
+            <div class="card-body" style="padding-top: 16px;">
+
+                <!-- Filter Bar -->
+                <form id="filterForm" class="filter-bar">
+                    <select id="filterStatus" class="form-select">
+                        <option value="">All Statuses</option>
+                        <option value="pending">🕐 Pending</option>
+                        <option value="in_progress">🔄 In Progress</option>
+                        <option value="resolved">✅ Resolved</option>
+                        <option value="rejected">❌ Rejected</option>
+                    </select>
+
+                    <select id="filterDept" class="form-select">
+                        <option value="">All Departments</option>
+                        <!-- Loaded dynamically -->
+                    </select>
+
+                    <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+                    <button type="reset" class="btn btn-outline btn-sm">Clear</button>
+                </form>
+
+                <!-- Complaints Table -->
+                <div id="complaintsTableContainer">
+                    <p style="color:var(--gray-500);padding:20px">Loading...</p>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+</div>
+
+
+<!-- ── Update Status Modal ── -->
+<div class="modal-overlay" id="updateModal">
+    <div class="modal">
+
+        <div class="modal-header">
+            <h3>✏️ Update Complaint Status</h3>
+            <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+
+        <div class="modal-body">
+
+            <div id="modalAlert"></div>
+
+            <!-- Complaint Summary -->
+            <div style="background: var(--off-white); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 20px;">
+                <div style="font-size: 0.78rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;">Complaint Code</div>
+                <div style="font-family: monospace; color: var(--amber); font-size: 1.1rem; font-weight: 700;" id="modalComplaintCode"></div>
+                <div style="margin-top: 8px; font-size: 0.88rem; color: var(--gray-700);" id="modalSubject"></div>
+                <div style="margin-top: 6px; font-size: 0.82rem; color: var(--gray-500);" id="modalDept"></div>
+            </div>
+
+            <div style="background: var(--off-white); border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 20px; max-height: 120px; overflow-y: auto;">
+                <div style="font-size: 0.78rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase; margin-bottom: 6px;">Description</div>
+                <div style="font-size: 0.88rem; color: var(--gray-700); line-height: 1.6;" id="modalDescription"></div>
+            </div>
+
+            <!-- Hidden: complaint ID -->
+            <input type="hidden" id="updateComplaintId">
+
+            <!-- Status Update -->
+            <div class="form-group">
+                <label class="form-label" for="updateStatus">Update Status</label>
+                <select id="updateStatus" class="form-select">
+                    <option value="pending">🕐 Pending</option>
+                    <option value="in_progress">🔄 In Progress</option>
+                    <option value="resolved">✅ Resolved</option>
+                    <option value="rejected">❌ Rejected</option>
+                </select>
+            </div>
+
+            <!-- Remarks -->
+            <div class="form-group">
+                <label class="form-label" for="updateRemarks">Admin Remarks (optional)</label>
+                <textarea
+                    id="updateRemarks"
+                    class="form-control"
+                    placeholder="Add a note for the student, e.g. 'Issue forwarded to the department head for review.'"
+                    rows="3"
+                ></textarea>
+                <div class="form-hint">This remark will be visible to the student when they track their complaint.</div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" id="updateBtn" onclick="submitStatusUpdate()">
+                💾 Save Changes
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="../js/script.js"></script>
+<script>
+    // Sidebar quick filters
+    function filterByStatus(status) {
+        document.getElementById('filterStatus').value = status;
+        loadAdminComplaints(status);
+        // Update active sidebar item
+        document.querySelectorAll('.sidebar-link').forEach(el => el.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+    }
+
+    // Adjust fetch path for admin subfolder
+    const _origFetch = window.fetch.bind(window);
+    window.fetch = (url, opts) => {
+        if (url.startsWith('php/')) url = '../' + url;
+        return _origFetch(url, opts);
+    };
+</script>
+
+</body>
+</html>

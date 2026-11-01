@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login — Complaint Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="student-login">
+
+<div class="login-page">
+    <div class="login-card">
+
+        <!-- Header -->
+        <div class="login-card-header">
+            <div class="login-icon">🎓</div>
+            <h2>Student Login</h2>
+            <p>Enter your college credentials to continue</p>
+        </div>
+
+        <!-- Body -->
+        <div class="login-card-body">
+
+            <!-- Alert Area -->
+            <div id="loginAlert"></div>
+
+            <!-- Login Form -->
+            <form id="studentLoginForm" autocomplete="off">
+
+                <div class="form-group">
+                    <label class="form-label" for="student_id">Student ID / Roll Number</label>
+                    <input
+                        type="text"
+                        id="student_id"
+                        name="student_id"
+                        class="form-control"
+                        placeholder="e.g. BCA2024001"
+                        required
+                        autocomplete="username"
+                    >
+                    <div class="form-hint">Use your college-issued student ID</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="form-control"
+                        placeholder="Enter your password"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full" style="margin-top: 8px;">
+                    🔑 Login to Portal
+                </button>
+
+            </form>
+
+            <!-- Demo Credentials (remove in production) -->
+            <div class="alert alert-info mt-2" style="font-size: 0.82rem; margin-top: 16px;">
+                <div>
+                    <strong>Demo Credentials:</strong><br>
+                    Student ID: <code>BCA2024001</code><br>
+                    Password: <code>student123</code>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="login-footer">
+            New student? <a href="register.html">Create an account</a>
+            <br style="margin-bottom:6px">
+            <a href="check_status.html">🔍 Track complaint without login</a>
+            &nbsp;|&nbsp;
+            <a href="index.html">← Back to Home</a>
+        </div>
+
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

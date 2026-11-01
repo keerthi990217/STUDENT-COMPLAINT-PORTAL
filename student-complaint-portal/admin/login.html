@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login — Complaint Portal</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="admin-login">
+
+<div class="login-page">
+    <div class="login-card">
+
+        <!-- Header -->
+        <div class="login-card-header">
+            <div class="login-icon">🔐</div>
+            <h2>Admin Login</h2>
+            <p>Authorized staff access only</p>
+        </div>
+
+        <!-- Body -->
+        <div class="login-card-body">
+
+            <div id="loginAlert"></div>
+
+            <form id="adminLoginForm">
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Admin Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="form-control"
+                        placeholder="admin@college.edu"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="form-control"
+                        placeholder="Enter admin password"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full" style="margin-top: 8px;">
+                    🔐 Admin Login
+                </button>
+
+            </form>
+
+            <!-- Demo Credentials (remove in production) -->
+            <div class="alert alert-info mt-2" style="font-size: 0.82rem; margin-top: 16px;">
+                <div>
+                    <strong>Demo Credentials:</strong><br>
+                    Email: <code>admin@college.edu</code><br>
+                    Password: <code>admin123</code>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="login-footer">
+            <a href="../index.html">← Back to Home</a>
+        </div>
+
+    </div>
+</div>
+
+<script src="../js/script.js"></script>
+</body>
+</html>

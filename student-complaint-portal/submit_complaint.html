@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Complaint — Complaint Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="submit-complaint">
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+    <div class="navbar-brand">
+        <div class="brand-icon">📋</div>
+        <div>
+            <div class="brand-text">Complaint Portal</div>
+            <div class="brand-sub">Submit Complaint</div>
+        </div>
+    </div>
+    <ul class="navbar-nav">
+        <li><a href="dashboard.html">🏠 Dashboard</a></li>
+        <li><a href="submit_complaint.html" class="active">➕ New Complaint</a></li>
+        <li><a href="check_status.html">🔍 Track</a></li>
+        <li><a href="php/logout.php?type=student" class="btn-logout">Logout</a></li>
+    </ul>
+</nav>
+
+<!-- ── Page Header ── -->
+<div class="page-header">
+    <div class="container">
+        <h1>Submit a Complaint</h1>
+        <p>Fill in the details below. You can submit anonymously if you prefer.</p>
+    </div>
+</div>
+
+<!-- ── Form Area ── -->
+<div class="container" style="padding-top: 36px; padding-bottom: 56px; max-width: 720px;">
+
+    <!-- ── FORM SECTION ── -->
+    <div id="formSection">
+
+        <div class="card">
+            <div class="card-header">
+                <h3>📝 Complaint Details</h3>
+                <span class="badge badge-anonymous">🕵️ Anonymous Mode Available</span>
+            </div>
+            <div class="card-body">
+
+                <!-- Alert Area -->
+                <div id="complaintAlert"></div>
+
+                <form id="complaintForm">
+
+                    <!-- Row: Category + Department -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+
+                        <div class="form-group">
+                            <label class="form-label" for="category">Complaint Category <span style="color:red">*</span></label>
+                            <select id="category" name="category" class="form-select" required>
+                                <option value="">-- Select Category --</option>
+                                <option value="academics">📚 Academics</option>
+                                <option value="faculty">👨‍🏫 Faculty</option>
+                                <option value="facilities">🏫 Facilities</option>
+                                <option value="hostel">🏠 Hostel</option>
+                                <option value="other">📋 Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="deptSelect">Concerned Department <span style="color:red">*</span></label>
+                            <select id="deptSelect" name="department_id" class="form-select" required>
+                                <option value="">-- Select Department --</option>
+                                <!-- Loaded dynamically via JS -->
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <!-- Subject -->
+                    <div class="form-group">
+                        <label class="form-label" for="subject">Complaint Subject <span style="color:red">*</span></label>
+                        <input
+                            type="text"
+                            id="subject"
+                            name="subject"
+                            class="form-control"
+                            placeholder="Brief title of your complaint (max 255 characters)"
+                            maxlength="255"
+                            required
+                        >
+                    </div>
+
+                    <!-- Description -->
+                    <div class="form-group">
+                        <label class="form-label" for="description">Detailed Description <span style="color:red">*</span></label>
+                        <textarea
+                            id="description"
+                            name="description"
+                            class="form-control"
+                            placeholder="Describe your complaint in detail. Include dates, names (if not anonymous), and specific incidents. Minimum 20 characters."
+                            rows="6"
+                            required
+                        ></textarea>
+                        <div class="form-hint">Be as specific as possible to help resolve your issue faster.</div>
+                    </div>
+
+                    <!-- Anonymous Checkbox -->
+                    <div class="form-group">
+                        <div style="background: var(--off-white); border-radius: var(--radius-sm); padding: 16px 18px; border: 1.5px solid var(--gray-100);">
+                            <label class="form-check">
+                                <input type="checkbox" name="is_anonymous" id="isAnonymous" value="1" checked>
+                                <span class="form-check-label">
+                                    <strong>🕵️ Submit Anonymously</strong> — Your name and student ID will be hidden from admin
+                                </span>
+                            </label>
+                            <p style="margin-top: 8px; margin-left: 28px; font-size: 0.8rem; color: var(--gray-500);">
+                                Even in anonymous mode, your account is used to prevent abuse. Your identity remains hidden from administrators.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-full" style="padding: 14px;">
+                        📤 Submit Complaint
+                    </button>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- Guidelines -->
+        <div class="card mt-3" style="border-left: 4px solid var(--amber);">
+            <div class="card-body" style="padding: 18px 22px;">
+                <h4 style="font-family:'DM Sans',sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--navy); margin-bottom: 10px;">
+                    📌 Submission Guidelines
+                </h4>
+                <ul style="font-size: 0.88rem; color: var(--gray-700); padding-left: 18px; line-height: 2;">
+                    <li>Be honest and specific in your complaint description.</li>
+                    <li>Select the correct department for faster resolution.</li>
+                    <li>Save your complaint code — you'll need it to track progress.</li>
+                    <li>False or abusive complaints may result in disciplinary action.</li>
+                    <li>Anonymous complaints are treated with equal priority.</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <!-- ── END FORM SECTION ── -->
+
+
+    <!-- ── SUCCESS SECTION (shown after submission) ── -->
+    <div id="successSection" class="hidden">
+        <div class="card text-center">
+            <div class="card-body" style="padding: 48px 32px;">
+
+                <div style="font-size: 4rem; margin-bottom: 16px;">🎉</div>
+                <h2 style="color: var(--navy); margin-bottom: 8px;">Complaint Submitted!</h2>
+                <p style="color: var(--gray-500); margin-bottom: 28px;">
+                    Your complaint has been received. Save your complaint code below to track its status.
+                </p>
+
+                <div class="code-box">
+                    <div class="label">Your Complaint Code</div>
+                    <div class="code" id="codeDisplay">CMP-2024-0001</div>
+                    <div class="hint">Keep this code safe — use it to track your complaint status</div>
+                </div>
+
+                <div style="display: flex; gap: 14px; justify-content: center; margin-top: 28px; flex-wrap: wrap;">
+                    <a href="check_status.html" class="btn btn-primary">🔍 Track Status</a>
+                    <a href="dashboard.html" class="btn btn-outline">🏠 My Dashboard</a>
+                    <button class="btn btn-outline" onclick="document.getElementById('successSection').classList.add('hidden'); document.getElementById('formSection').classList.remove('hidden');">
+                        ➕ Submit Another
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- ── END SUCCESS SECTION ── -->
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

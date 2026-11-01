@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration — Complaint Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="student-register">
+
+<div class="login-page">
+    <div class="login-card" style="max-width: 480px;">
+
+        <!-- Header -->
+        <div class="login-card-header">
+            <div class="login-icon">📝</div>
+            <h2>Student Registration</h2>
+            <p>Create your account using college credentials</p>
+        </div>
+
+        <!-- Body -->
+        <div class="login-card-body">
+
+            <div id="registerAlert"></div>
+
+            <form id="registerForm" autocomplete="off">
+
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label class="form-label" for="name">Full Name <span style="color:red">*</span></label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="form-control"
+                        placeholder="e.g. Rahul Sharma"
+                        required
+                    >
+                </div>
+
+                <!-- Student ID -->
+                <div class="form-group">
+                    <label class="form-label" for="student_id">Student ID / Roll Number <span style="color:red">*</span></label>
+                    <input
+                        type="text"
+                        id="student_id"
+                        name="student_id"
+                        class="form-control"
+                        placeholder="e.g. BCA2024001"
+                        required
+                    >
+                    <div class="form-hint">Use your official college-issued roll number</div>
+                </div>
+
+                <!-- College Email -->
+                <div class="form-group">
+                    <label class="form-label" for="email">College Email <span style="color:red">*</span></label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        class="form-control"
+                        placeholder="e.g. rahul@college.edu"
+                        required
+                    >
+                </div>
+
+                <!-- Department + Year (side by side) -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+
+                    <div class="form-group">
+                        <label class="form-label" for="department_id">Department <span style="color:red">*</span></label>
+                        <select id="department_id" name="department_id" class="form-select" required>
+                            <option value="">-- Select --</option>
+                            <option value="BCA">BCA</option>
+                            <option value="BCOM">BCOM</option>
+                            <option value="BSE">BBSE</option>
+                            <option value="BBA">BBA</option>
+                            <option value="BA">BCA</option>
+                            
+                            <!-- Loaded via JS -->
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="year">Year <span style="color:red">*</span></label>
+                        <select id="year" name="year" class="form-select" required>
+                            <option value="">-- Year --</option>
+                            <option value="1">1st Year</option>
+                            <option value="2">2nd Year</option>
+                            <option value="3">3rd Year</option>
+                            <option value="4">4th Year</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label class="form-label" for="password">Password <span style="color:red">*</span></label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="form-control"
+                        placeholder="Minimum 6 characters"
+                        minlength="6"
+                        required
+                    >
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label class="form-label" for="confirm_password">Confirm Password <span style="color:red">*</span></label>
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        class="form-control"
+                        placeholder="Re-enter your password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full" style="margin-top: 4px;">
+                    ✅ Create Account
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="login-footer">
+            Already have an account? <a href="login.html">Login here</a>
+            &nbsp;|&nbsp;
+            <a href="index.html">← Home</a>
+        </div>
+
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>

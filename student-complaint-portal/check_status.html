@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Complaint — Complaint Portal</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="check-status">
+
+<!-- ── Navbar ── -->
+<nav class="navbar">
+    <div class="navbar-brand">
+        <div class="brand-icon">📋</div>
+        <div>
+            <div class="brand-text">Complaint Portal</div>
+            <div class="brand-sub">Track Complaint</div>
+        </div>
+    </div>
+    <ul class="navbar-nav">
+        <li><a href="index.html">🏠 Home</a></li>
+        <li><a href="login.html">🎓 Student Login</a></li>
+    </ul>
+</nav>
+
+<!-- ── Page Header ── -->
+<div class="page-header">
+    <div class="container">
+        <h1>Track Your Complaint</h1>
+        <p>Enter your complaint code to check the current status — no login required</p>
+    </div>
+</div>
+
+<!-- ── Track Form ── -->
+<div class="container" style="padding-top: 40px; padding-bottom: 56px; max-width: 600px;">
+
+    <div class="card">
+        <div class="card-header">
+            <h3>🔍 Status Lookup</h3>
+        </div>
+        <div class="card-body">
+
+            <div id="statusAlert"></div>
+
+            <form id="statusCheckForm">
+                <div class="form-group">
+                    <label class="form-label" for="complaintCode">Complaint Code</label>
+                    <input
+                        type="text"
+                        id="complaintCode"
+                        class="form-control"
+                        placeholder="e.g. CMP-2024-0001"
+                        maxlength="20"
+                        style="font-family: monospace; font-size: 1rem; letter-spacing: 0.05em; text-transform: uppercase;"
+                        autocomplete="off"
+                    >
+                    <div class="form-hint">Format: CMP-YYYY-XXXX (provided when you submitted your complaint)</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">
+                    🔍 Check Status
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Result Area -->
+    <div id="statusResult" class="hidden"></div>
+
+    <!-- Info -->
+    <div class="alert alert-info mt-3">
+        <span>🕵️</span>
+        <div>
+            <strong>Anonymous Tracking:</strong> You can check complaint status without logging in. Your identity is never revealed through this tool.
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 24px;">
+        <a href="login.html" style="color: var(--navy-light); font-weight: 600; font-size: 0.9rem;">
+            → Login to view all your complaints
+        </a>
+    </div>
+
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
